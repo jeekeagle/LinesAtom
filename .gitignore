@@ -1,0 +1,8 @@
+node_modules/
+dist/
+data/store.json
+data/secrets.json
+data/*.log
+screenshots/
+.DS_Store
+*.tmp

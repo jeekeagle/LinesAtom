@@ -1,0 +1,36 @@
+{
+  "name": "lecture-axis",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "lecture-axis": "./cli/lecture-axis.mjs"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n API,WEB -c green,cyan \"tsx watch server/index.ts\" \"vite --host 127.0.0.1\"",
+    "build": "tsc --noEmit && vite build",
+    "start": "tsx server/index.ts",
+    "preview": "vite preview --host 127.0.0.1",
+    "cli": "node cli/lecture-axis.mjs",
+    "verify": "tsx scripts/verify.ts"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.1.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.5",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "playwright-core": "^1.64.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7"
+  }
+}

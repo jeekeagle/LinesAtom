@@ -1,0 +1,1470 @@
+{
+  "meta": {
+    "product": "讲义轴",
+    "course": "Agent 设计与应用 · 第2章",
+    "title": "信息化、数字化、智能化：三个时代的变迁",
+    "subtitle": "三种让权，一条不能跳过的依赖链",
+    "durationMinutes": 28,
+    "charsPerMinute": 112,
+    "cognitiveLoadCap": 14,
+    "questionRatioFloor": 0.08,
+    "version": "0.1.0",
+    "generatedAt": "2026-10-29T06:00:00.000Z",
+    "source": "revision.md",
+    "engineRunId": "run_seed_20261029",
+    "schemaVersion": "1.0",
+    "revision": 1
+  },
+  "sections": [
+    {
+      "id": "s1",
+      "order": 1,
+      "title": "三个词被混着用的代价",
+      "short": "混用的代价"
+    },
+    {
+      "id": "s2",
+      "order": 2,
+      "title": "信息化：让组织第一次看清自己",
+      "short": "信息化"
+    },
+    {
+      "id": "s3",
+      "order": 3,
+      "title": "数字化：让系统自己算出结论",
+      "short": "数字化"
+    },
+    {
+      "id": "s4",
+      "order": 4,
+      "title": "智能化：让结论自己动起来",
+      "short": "智能化"
+    },
+    {
+      "id": "s5",
+      "order": 5,
+      "title": "三个台阶的真实顺序",
+      "short": "真实顺序"
+    }
+  ],
+  "blocks": [
+    {
+      "id": "b01",
+      "order": 1,
+      "sectionId": "s1",
+      "label": "global",
+      "text": "这一章先不急着给三个词下定义。它从一个更实际的问题开始：当同一份预算可以用三种说法申报，组织究竟把什么交给了系统，又把什么留在了人手里？"
+    },
+    {
+      "id": "b02",
+      "order": 2,
+      "sectionId": "s1",
+      "label": "example",
+      "text": "一家制造业集团的申报表上排着三行科目：信息化系统运维与升级、数字化平台建设、智能化应用试点。往下看申报说明，这三段文字几乎可以互换，都是“打通数据”“提升效率”“赋能业务”“支撑决策”。"
+    },
+    {
+      "id": "b03",
+      "order": 3,
+      "sectionId": "s1",
+      "label": "core",
+      "text": "同样一套图表，叫“数据看板”和叫“AI 智能决策中枢”，报价能差出一个数量级。概念混用首先污染的不是定义，而是预算科目、考核口径与最后向谁问责。"
+    },
+    {
+      "id": "b04",
+      "order": 4,
+      "sectionId": "s1",
+      "label": "transition",
+      "text": "所以问题不在词义，在账。词一旦进入规划文本，就会进入预算、KPI、供应商报价单和审计条目。"
+    },
+    {
+      "id": "b05",
+      "order": 5,
+      "sectionId": "s1",
+      "label": "example",
+      "text": "政策语言里，“数字化”在“十四五”规划和 2035 年纲要中出现 25 次，高相关词汇 60 多次。到“十五五”时期，用词已经转向“数智化”。三个词在文件里互换，最后就是三笔钱按同一套逻辑花出去。"
+    },
+    {
+      "id": "b06",
+      "order": 6,
+      "sectionId": "s1",
+      "label": "question",
+      "text": "如果三个词真是同一条平滑的升级路线，投入越多就走得越远，那么为什么信息化投了二十年，很多组织得到的仍然只是一份更快的报表？"
+    },
+    {
+      "id": "b07",
+      "order": 7,
+      "sectionId": "s1",
+      "label": "conclusion",
+      "text": "这三个词不是三个刻度，是三种让权。每跨过一级，组织要交出去的东西不一样：记录权、判断权、行动权。"
+    },
+    {
+      "id": "b08",
+      "order": 8,
+      "sectionId": "s1",
+      "label": "core",
+      "text": "第一级交出去的是记录权，第二级交出去的是判断权，第三级交出去的是行动权。这三样东西互斥，也在这个分层里恰好穷尽一件事从被记下到被执行的三个环节。"
+    },
+    {
+      "id": "b09",
+      "order": 9,
+      "sectionId": "s1",
+      "label": "core",
+      "text": "记录权，是谁有权决定一件事以什么方式被记下来。一件事要么靠人记，要么靠系统记；没有第三种记录方式。"
+    },
+    {
+      "id": "b10",
+      "order": 10,
+      "sectionId": "s1",
+      "label": "core",
+      "text": "判断权，是谁有权决定一堆数据意味着什么。结论可以由人在会上给出，也可以由模型直接产出，但不能同时成为同一层级的最终结论。"
+    },
+    {
+      "id": "b11",
+      "order": 11,
+      "sectionId": "s1",
+      "label": "core",
+      "text": "行动权，是谁有权决定下一步动作由谁执行、在哪里执行。它可以留在人的审批流里，也可以交给能够调用工具的系统。"
+    },
+    {
+      "id": "b12",
+      "order": 12,
+      "sectionId": "s1",
+      "label": "transition",
+      "text": "这不是一份可以自由排列的清单，它有硬顺序。不交记录权，就没有干净的数据；没有干净数据，判断不可信；判断不可信，你也不敢把行动权交给它。"
+    },
+    {
+      "id": "b13",
+      "order": 13,
+      "sectionId": "s2",
+      "label": "global",
+      "text": "第二级台阶从组织最早、也最容易被低估的一次变化开始：让业务动作先在系统里留下同一种记录。"
+    },
+    {
+      "id": "b14",
+      "order": 14,
+      "sectionId": "s2",
+      "label": "example",
+      "text": "九十年代末的一家制造企业，仓库出入库靠手写单子，客户下单靠电话，采购进货记在 Excel，老板要看经营情况，得让财务加三天班汇总。它的问题不是慢，而是回答不了“公司现在到底什么状况”。"
+    },
+    {
+      "id": "b15",
+      "order": 15,
+      "sectionId": "s2",
+      "label": "core",
+      "text": "信息化的本质，是把业务流程固化进系统。销售下单进 CRM，仓库发货用 WMS 扫码，财务结算走 ERP，考勤打卡进 OA。同一个动作，以前靠人记、靠纸传，现在必须先在系统里落一条记录。"
+    },
+    {
+      "id": "b16",
+      "order": 16,
+      "sectionId": "s2",
+      "label": "transition",
+      "text": "这件事的哲学分量容易被低估。现代管理先分类与命名，再统计与治理；信息化做的正是把混沌的现实切成可记录、可查询的格子。"
+    },
+    {
+      "id": "b17",
+      "order": 17,
+      "sectionId": "s2",
+      "label": "question",
+      "text": "为什么信息化可以让原来也能做的事情做得更好，却没有让原来不能做的决策发生？为什么系统越多，管理层看到的有时只是更多、更快的报表？"
+    },
+    {
+      "id": "b18",
+      "order": 18,
+      "sectionId": "s2",
+      "label": "example",
+      "text": "顾衡在解读《国家的视角》时讲过一个道理：现代管理本质上是对社会的一次重构，第一步是分类与命名。信息化之后，组织第一次有了一个统一的自己，虽然字段不统一、口径不一致，但它至少可以被指着说：“这就是我们。”"
+    },
+    {
+      "id": "b19",
+      "order": 19,
+      "sectionId": "s2",
+      "label": "conclusion",
+      "text": "信息化提供参考，数字化提供决策；信息化指向观念，数字化指向行动。信息化做完了，组织看清了自己，但并没有变得更聪明。"
+    },
+    {
+      "id": "b20",
+      "order": 20,
+      "sectionId": "s2",
+      "label": "transition",
+      "text": "连接完成了，事实被送到了人面前。下一步要问的是：结论能不能不再由人当场给出？"
+    },
+    {
+      "id": "b21",
+      "order": 21,
+      "sectionId": "s3",
+      "label": "global",
+      "text": "进入第三级，先看一个可操作的判据：判断最终发生在哪里。系统产出的是报表，还是直接产出结论？"
+    },
+    {
+      "id": "b22",
+      "order": 22,
+      "sectionId": "s3",
+      "label": "core",
+      "text": "数字化的核心不是把信息连接起来，而是让数字驱动判断。如果系统直接给出“这个客户该不该给账期”“这台设备下次何时保养”，人只负责复核，判断权才真正开始迁移。"
+    },
+    {
+      "id": "b23",
+      "order": 23,
+      "sectionId": "s3",
+      "label": "question",
+      "text": "一套系统叫得很高级，但最终结论仍由人在会上得出，它算数字化吗？反过来，一份很朴素的系统输出直接决定了资源怎么分配，它又算哪一级？"
+    },
+    {
+      "id": "b24",
+      "order": 24,
+      "sectionId": "s3",
+      "label": "example",
+      "text": "深圳机场的机位调优案例常被拿来当这一级的标志。据报道，通过数据和算法优化机位资源分配，廊桥机位使用效率提高，每年约两百六十万旅客不再经摆渡车登机。这些数字只见于公开分享中的转述，这里只用它说明机制：判断从调度室搬进了系统。"
+    },
+    {
+      "id": "b25",
+      "order": 25,
+      "sectionId": "s3",
+      "label": "core",
+      "text": "数据孤岛是有数据但对不上：ERP 里有订单，MES 里有工序，SCADA 里有设备数据，三张表各自完整，凑不到一起。它靠治理解决，路径清楚，但很花钱。"
+    },
+    {
+      "id": "b26",
+      "order": 26,
+      "sectionId": "s3",
+      "label": "example",
+      "text": "一项 2026 年的行业研究显示，75.6% 的制造企业把数据孤岛与系统集成列为转型中最迫切的需求。这个数字背后是很具体的画面：同一个客户在两套系统里有两个编码，数据都在，却没有共同的语言。"
+    },
+    {
+      "id": "b27",
+      "order": 27,
+      "sectionId": "s3",
+      "label": "core",
+      "text": "隐性经验是另一种缺失：数据根本没有。设备怎么调、批次为什么异常、质检靠什么判断，这些从未进过系统，也就没法被模型学到。它靠治理解决不了，得先把隐性判断显性化。"
+    },
+    {
+      "id": "b28",
+      "order": 28,
+      "sectionId": "s3",
+      "label": "example",
+      "text": "段誉讲厨房时说过，老师傅的手艺以手感、火候、气味多通道存在，学徒只能照猫画虎。工厂是一回事：老师傅退休之后，判断规则如果没有被说出来、写下来、标定过，这些经验会直接消失。"
+    },
+    {
+      "id": "b29",
+      "order": 29,
+      "sectionId": "s3",
+      "label": "question",
+      "text": "数据孤岛和隐性经验，看起来都缺系统。可如果买的系统再多，为什么有的缺口能补上，有的缺口反而越补越大？"
+    },
+    {
+      "id": "b30",
+      "order": 30,
+      "sectionId": "s3",
+      "label": "conclusion",
+      "text": "数字化真正难的地方，不是算不出来，是没有可算的东西。前者缺管道，后者缺内容；把两件事当成一件，转型预算就一定会花错。"
+    },
+    {
+      "id": "b31",
+      "order": 31,
+      "sectionId": "s3",
+      "label": "transition",
+      "text": "当系统能算出结论，下一级交出去的就不再是“人做之前”的判断，而是动作本身。"
+    },
+    {
+      "id": "b32",
+      "order": 32,
+      "sectionId": "s4",
+      "label": "global",
+      "text": "第三级台阶，Agent 真正的位置。前两级都在人动手之前，这一级第一次允许“看一眼再动手”的环节不发生。"
+    },
+    {
+      "id": "b33",
+      "order": 33,
+      "sectionId": "s4",
+      "label": "core",
+      "text": "智能化是把行动权交给系统：它可以自己规划、调用工具、执行动作并检查结果。不是多了一个更会聊天的界面，而是链条末端第一次可以不经过人。"
+    },
+    {
+      "id": "b34",
+      "order": 34,
+      "sectionId": "s4",
+      "label": "example",
+      "text": "行业里大致有个说法：2023 到 2024 年，主流产品是“你问它答，你不问它就不动”；2025 到 2026 年，它开始能自己规划、自己调工具、自己检查结果。这一步跨过去，转手信息的中间环节第一次可以被绕开。"
+    },
+    {
+      "id": "b35",
+      "order": 35,
+      "sectionId": "s4",
+      "label": "question",
+      "text": "高投入、高取消、低上线同时为真，怎么解释？如果钱已经进来了，模型也越来越强，为什么真正进入生产的 Agent 仍然这么少？"
+    },
+    {
+      "id": "b36",
+      "order": 36,
+      "sectionId": "s4",
+      "label": "example",
+      "text": "一类失败很典型：Agent 要发起采购审批，走公司的老审批流，工号体系里却没有对应角色；权限按岗位设计，而它没有岗位。订单表和工序表也对不上，同一个客户有两个编码。它遇到异常只能抛回给人，人并没有省事，反而多了一道核对。"
+    },
+    {
+      "id": "b37",
+      "order": 37,
+      "sectionId": "s4",
+      "label": "transition",
+      "text": "这不是智能不够，是它在替前两级的欠账付利息。74% 的企业计划两年内部署自主 Agent，但只有 21% 建立了成熟的治理模型；行动权急着交出去，问责机制没有跟上。"
+    },
+    {
+      "id": "b38",
+      "order": 38,
+      "sectionId": "s4",
+      "label": "conclusion",
+      "text": "判断一个组织有没有真正到第三级，别看它用了多少 Agent。看三件事：数据能不能被机器直接读取，流程有没有被写到可以复述，异常处理有没有明文规则。"
+    },
+    {
+      "id": "b39",
+      "order": 39,
+      "sectionId": "s4",
+      "label": "transition",
+      "text": "于是问题回到开头：三个词为什么不能混着用？因为混着用的实质，是把三种不同性质的让权当成了一次投入的增加。"
+    },
+    {
+      "id": "b40",
+      "order": 40,
+      "sectionId": "s5",
+      "label": "global",
+      "text": "最后把三级台阶当作一份体检表，而不是一张路线图。它不回答“该往哪走”，只回答“现在站在哪”。"
+    },
+    {
+      "id": "b41",
+      "order": 41,
+      "sectionId": "s5",
+      "label": "core",
+      "text": "三个时代做的是同一件事：把信息不对称一级一级清零。信息化清零“我看得见你看不见”，数字化清零“我算得出你算不出”，智能化清零“我做得到你做不到”。"
+    },
+    {
+      "id": "b42",
+      "order": 42,
+      "sectionId": "s5",
+      "label": "question",
+      "text": "你的生意里，哪一部分价值是靠信息不对称挣来的？如果这个比例很高，或者很低，你要小心的分别是哪一件事？"
+    },
+    {
+      "id": "b43",
+      "order": 43,
+      "sectionId": "s5",
+      "label": "core",
+      "text": "换牌和跳级不一样：跳级是往没建好的楼上盖，换牌是楼没动、门牌换了。系统改了名字，能力没动，唯一的产出是一份可以拿去汇报的转型成果。"
+    },
+    {
+      "id": "b44",
+      "order": 44,
+      "sectionId": "s5",
+      "label": "example",
+      "text": "企业常见的错位有三种。跳级是地基没打就上第三级，失败后误以为“AI 不适合我们这行”；原地是行业根本不吃智能化红利，却硬要往上走；换牌最难识别，因为换牌的人不会失败，他从一开始就没打算让系统真的干活。"
+    },
+    {
+      "id": "b45",
+      "order": 45,
+      "sectionId": "s5",
+      "label": "conclusion",
+      "text": "看清自己站在哪一级，比急着往上爬重要得多。如果价值高度依赖信息转手，要小心它正在消失；如果依赖很低，要小心别人的成本结构把被动劣势推到你面前。"
+    },
+    {
+      "id": "b46",
+      "order": 46,
+      "sectionId": "s5",
+      "label": "conclusion",
+      "text": "你把单子交给纸，纸回你账本；你把账本交给系统，系统回报表；你把报表交给模型，模型给结论；你把结论交给智能体，智能体还你一串动作。"
+    }
+  ],
+  "concepts": [
+    {
+      "id": "c00",
+      "name": "三级让权模型",
+      "definition": "用记录权、判断权、行动权的迁移，区分三个技术阶段。",
+      "parentId": null,
+      "difference": "不是能力清单，而是一条存在先后依赖的让权链。",
+      "misconceptions": [
+        "把它当成成熟度评分",
+        "以为三级可以自由排列"
+      ],
+      "anchorBlockId": "b08",
+      "recurrences": [
+        "b09",
+        "b10",
+        "b11",
+        "b12",
+        "b40"
+      ]
+    },
+    {
+      "id": "c01",
+      "name": "记录权",
+      "definition": "决定一件事以什么方式被记录、由谁记录的权力。",
+      "parentId": "c00",
+      "difference": "关心事实如何进入系统，不判断事实意味着什么。",
+      "misconceptions": [
+        "把上线业务系统等同于交记录权",
+        "以为数据库存在就有统一记录"
+      ],
+      "anchorBlockId": "b09",
+      "recurrences": [
+        "b15",
+        "b19"
+      ]
+    },
+    {
+      "id": "c02",
+      "name": "判断权",
+      "definition": "决定一组数据意味着什么、结论由谁给出的权力。",
+      "parentId": "c00",
+      "difference": "落在结论生成处，不落在报表展示处。",
+      "misconceptions": [
+        "把可视化大屏当作数字化",
+        "以为算法辅助人仍等于交出判断权"
+      ],
+      "anchorBlockId": "b10",
+      "recurrences": [
+        "b22",
+        "b23",
+        "b43"
+      ]
+    },
+    {
+      "id": "c03",
+      "name": "行动权",
+      "definition": "决定下一步动作由谁执行、在哪里执行的权力。",
+      "parentId": "c00",
+      "difference": "改变动作的发起与执行者，不只是给出建议。",
+      "misconceptions": [
+        "把生成待办当作自动执行",
+        "以为有审批流就不需要治理"
+      ],
+      "anchorBlockId": "b11",
+      "recurrences": [
+        "b33",
+        "b36",
+        "b38"
+      ]
+    },
+    {
+      "id": "c04",
+      "name": "信息化",
+      "definition": "把业务流程固化进系统，让组织拥有统一记录的阶段。",
+      "parentId": "c00",
+      "difference": "提供参考与事实，不直接给出业务结论。",
+      "misconceptions": [
+        "系统越多越信息化",
+        "报表更快等于决策更好"
+      ],
+      "anchorBlockId": "b15",
+      "recurrences": [
+        "b17",
+        "b19",
+        "b23"
+      ]
+    },
+    {
+      "id": "c05",
+      "name": "数字化",
+      "definition": "让系统直接产出判断结论，人只负责复核的阶段。",
+      "parentId": "c00",
+      "difference": "关键看判断发生在系统还是人的会上。",
+      "misconceptions": [
+        "数字化就是信息化升级版",
+        "买到算法就完成数字化"
+      ],
+      "anchorBlockId": "b22",
+      "recurrences": [
+        "b30",
+        "b43"
+      ]
+    },
+    {
+      "id": "c06",
+      "name": "智能化",
+      "definition": "让系统承接行动，自主规划、调用工具并检查结果的阶段。",
+      "parentId": "c00",
+      "difference": "改变动作本身，而不是只改变人对事实的掌握。",
+      "misconceptions": [
+        "聊天机器人就是智能体",
+        "智能程度等于行动可靠性"
+      ],
+      "anchorBlockId": "b33",
+      "recurrences": [
+        "b36",
+        "b38"
+      ]
+    },
+    {
+      "id": "c07",
+      "name": "数据孤岛",
+      "definition": "数据存在但口径、编码或接口不通，无法共同使用。",
+      "parentId": "c05",
+      "difference": "缺的是连接与治理，不是数据本身。",
+      "misconceptions": [
+        "孤岛等于没有数据",
+        "多买系统可以自然打通"
+      ],
+      "anchorBlockId": "b25",
+      "recurrences": [
+        "b26",
+        "b29"
+      ]
+    },
+    {
+      "id": "c08",
+      "name": "隐性经验",
+      "definition": "尚未被说出、写下并标定，因而无法进入系统的判断规则。",
+      "parentId": "c05",
+      "difference": "缺的是内容，不是数据管道。",
+      "misconceptions": [
+        "经验可以靠更多系统自动获得",
+        "专家退休前随便录几段视频就完成显性化"
+      ],
+      "anchorBlockId": "b27",
+      "recurrences": [
+        "b28",
+        "b29"
+      ]
+    },
+    {
+      "id": "c09",
+      "name": "换牌",
+      "definition": "系统名称与叙事改变，但业务能力与让权结构没有变化。",
+      "parentId": "c00",
+      "difference": "跳级会失败，换牌不会失败，因为原本就不打算真正执行。",
+      "misconceptions": [
+        "换牌等于普通的技术升级",
+        "只要项目失败就是跳级"
+      ],
+      "anchorBlockId": "b43",
+      "recurrences": [
+        "b44",
+        "b45"
+      ]
+    },
+    {
+      "id": "c10",
+      "name": "信息不对称",
+      "definition": "一方掌握另一方无法获得或无法计算的信息而形成的价值差。",
+      "parentId": "c00",
+      "difference": "三个时代分别清零看见、算出与做到的不对称。",
+      "misconceptions": [
+        "信息不对称只指信息保密",
+        "数字化赋能与中间层租金消失互相矛盾"
+      ],
+      "anchorBlockId": "b41",
+      "recurrences": [
+        "b42",
+        "b43",
+        "b45"
+      ]
+    },
+    {
+      "id": "c11",
+      "name": "概念混用",
+      "definition": "把不同让权层级装进同一套预算、口径与问责语言。",
+      "parentId": "c00",
+      "difference": "问题不只在定义模糊，更在资源与责任被混算。",
+      "misconceptions": [
+        "混用只是营销话术",
+        "统一术语就等于统一能力"
+      ],
+      "anchorBlockId": "b03",
+      "recurrences": [
+        "b05",
+        "b07"
+      ]
+    }
+  ],
+  "pointers": [
+    {
+      "id": "p01",
+      "blockId": "b01",
+      "mediaType": "map",
+      "targetId": "m-course",
+      "trigger": "preload"
+    },
+    {
+      "id": "p02",
+      "blockId": "b02",
+      "mediaType": "case",
+      "targetId": "case-budget",
+      "trigger": "preload"
+    },
+    {
+      "id": "p03",
+      "blockId": "b03",
+      "mediaType": "concept",
+      "targetId": "c11",
+      "trigger": "preload"
+    },
+    {
+      "id": "p04",
+      "blockId": "b05",
+      "mediaType": "case",
+      "targetId": "case-policy",
+      "trigger": "preload"
+    },
+    {
+      "id": "p05",
+      "blockId": "b06",
+      "mediaType": "qa",
+      "targetId": "qa-why-order",
+      "trigger": "preload"
+    },
+    {
+      "id": "p06",
+      "blockId": "b07",
+      "mediaType": "cheatsheet",
+      "targetId": "cs-eras",
+      "trigger": "preload"
+    },
+    {
+      "id": "p07",
+      "blockId": "b08",
+      "mediaType": "concept",
+      "targetId": "c00",
+      "trigger": "preload"
+    },
+    {
+      "id": "p08",
+      "blockId": "b09",
+      "mediaType": "concept",
+      "targetId": "c01",
+      "trigger": "preload"
+    },
+    {
+      "id": "p09",
+      "blockId": "b10",
+      "mediaType": "concept",
+      "targetId": "c02",
+      "trigger": "preload"
+    },
+    {
+      "id": "p10",
+      "blockId": "b11",
+      "mediaType": "concept",
+      "targetId": "c03",
+      "trigger": "preload"
+    },
+    {
+      "id": "p11",
+      "blockId": "b13",
+      "mediaType": "map",
+      "targetId": "m-info",
+      "trigger": "preload"
+    },
+    {
+      "id": "p12",
+      "blockId": "b14",
+      "mediaType": "case",
+      "targetId": "case-factory",
+      "trigger": "preload"
+    },
+    {
+      "id": "p13",
+      "blockId": "b15",
+      "mediaType": "concept",
+      "targetId": "c04",
+      "trigger": "preload"
+    },
+    {
+      "id": "p14",
+      "blockId": "b17",
+      "mediaType": "qa",
+      "targetId": "qa-report-trap",
+      "trigger": "preload"
+    },
+    {
+      "id": "p15",
+      "blockId": "b18",
+      "mediaType": "case",
+      "targetId": "case-scott",
+      "trigger": "preload"
+    },
+    {
+      "id": "p16",
+      "blockId": "b19",
+      "mediaType": "cheatsheet",
+      "targetId": "cs-info-digital",
+      "trigger": "preload"
+    },
+    {
+      "id": "p17",
+      "blockId": "b21",
+      "mediaType": "slide",
+      "targetId": "sl-digital",
+      "trigger": "preload"
+    },
+    {
+      "id": "p18",
+      "blockId": "b22",
+      "mediaType": "concept",
+      "targetId": "c05",
+      "trigger": "preload"
+    },
+    {
+      "id": "p19",
+      "blockId": "b23",
+      "mediaType": "qa",
+      "targetId": "qa-judgement-place",
+      "trigger": "preload"
+    },
+    {
+      "id": "p20",
+      "blockId": "b24",
+      "mediaType": "case",
+      "targetId": "case-airport",
+      "trigger": "preload"
+    },
+    {
+      "id": "p21",
+      "blockId": "b25",
+      "mediaType": "concept",
+      "targetId": "c07",
+      "trigger": "preload"
+    },
+    {
+      "id": "p22",
+      "blockId": "b26",
+      "mediaType": "case",
+      "targetId": "case-data-silos",
+      "trigger": "preload"
+    },
+    {
+      "id": "p23",
+      "blockId": "b27",
+      "mediaType": "concept",
+      "targetId": "c08",
+      "trigger": "preload"
+    },
+    {
+      "id": "p24",
+      "blockId": "b28",
+      "mediaType": "case",
+      "targetId": "case-master",
+      "trigger": "preload"
+    },
+    {
+      "id": "p25",
+      "blockId": "b29",
+      "mediaType": "qa",
+      "targetId": "qa-buy-system",
+      "trigger": "preload"
+    },
+    {
+      "id": "p26",
+      "blockId": "b30",
+      "mediaType": "cheatsheet",
+      "targetId": "cs-digital",
+      "trigger": "preload"
+    },
+    {
+      "id": "p27",
+      "blockId": "b32",
+      "mediaType": "map",
+      "targetId": "m-agent",
+      "trigger": "preload"
+    },
+    {
+      "id": "p28",
+      "blockId": "b33",
+      "mediaType": "concept",
+      "targetId": "c06",
+      "trigger": "preload"
+    },
+    {
+      "id": "p29",
+      "blockId": "b34",
+      "mediaType": "case",
+      "targetId": "case-agent-shift",
+      "trigger": "preload"
+    },
+    {
+      "id": "p30",
+      "blockId": "b35",
+      "mediaType": "qa",
+      "targetId": "qa-agent-gap",
+      "trigger": "preload"
+    },
+    {
+      "id": "p31",
+      "blockId": "b36",
+      "mediaType": "case",
+      "targetId": "case-agent-approval",
+      "trigger": "preload"
+    },
+    {
+      "id": "p32",
+      "blockId": "b38",
+      "mediaType": "cheatsheet",
+      "targetId": "cs-ready",
+      "trigger": "preload"
+    },
+    {
+      "id": "p33",
+      "blockId": "b40",
+      "mediaType": "map",
+      "targetId": "m-final",
+      "trigger": "preload"
+    },
+    {
+      "id": "p34",
+      "blockId": "b41",
+      "mediaType": "concept",
+      "targetId": "c10",
+      "trigger": "preload"
+    },
+    {
+      "id": "p35",
+      "blockId": "b42",
+      "mediaType": "qa",
+      "targetId": "qa-value-source",
+      "trigger": "preload"
+    },
+    {
+      "id": "p36",
+      "blockId": "b43",
+      "mediaType": "concept",
+      "targetId": "c09",
+      "trigger": "preload"
+    },
+    {
+      "id": "p37",
+      "blockId": "b44",
+      "mediaType": "case",
+      "targetId": "case-three-errors",
+      "trigger": "preload"
+    },
+    {
+      "id": "p38",
+      "blockId": "b45",
+      "mediaType": "cheatsheet",
+      "targetId": "cs-quote",
+      "trigger": "preload"
+    },
+    {
+      "id": "p39",
+      "blockId": "b46",
+      "mediaType": "cheatsheet",
+      "targetId": "cs-closing",
+      "trigger": "preload"
+    }
+  ],
+  "media": {
+    "cases": [
+      {
+        "id": "case-budget",
+        "title": "三行科目，三段可以互换的说明",
+        "eyebrow": "预算现场",
+        "background": "制造业集团在同一张申报表里并列信息化运维、数字化平台、智能化试点。三个条目分属不同预算池，却共享几乎相同的说明话术。",
+        "action": "把“打通数据、提升效率、赋能业务、支撑决策”逐句对照，发现每句话都能同时为三行科目辩护。",
+        "result": "预算可以继续增加，验收却无法指向不同的能力变化。概念混用在这里不是措辞问题，而是支出与问责失去了区分。",
+        "generatedBy": "case-study@1.0.0"
+      },
+      {
+        "id": "case-policy",
+        "title": "词语进入规划，就进入预算",
+        "eyebrow": "政策文本",
+        "background": "“数字化”在“十四五”规划和 2035 年纲要中出现 25 次，高相关词汇 60 多次。到“十五五”时期，政策用词转向“数智化”。",
+        "action": "观察词频变化如何进入预算科目、KPI 口径、供应商报价单和审计条目。",
+        "result": "词义变化会带动组织语言整体换挡。若三个词继续互换，三笔钱仍会按同一套逻辑花出去。",
+        "generatedBy": "case-study@1.0.0"
+      },
+      {
+        "id": "case-factory",
+        "title": "财务加三天班，仍说不清公司现状",
+        "eyebrow": "九十年代末",
+        "background": "制造企业用纸单记录出入库，用电话接订单，用 Excel 管采购。每个部门都有自己的局部事实。",
+        "action": "老板要判断经营状况，只能让财务跨部门收集、汇总、核对三天。",
+        "result": "真正的瓶颈不是汇总速度，而是没有一种共同记录。信息化先解决“事实在哪里”，还没有解决“事实意味着什么”。",
+        "generatedBy": "case-study@1.0.0"
+      },
+      {
+        "id": "case-scott",
+        "title": "先分类命名，才有统一组织",
+        "eyebrow": "组织的视角",
+        "background": "詹姆斯·斯科特讨论现代管理时指出，管理始于把混沌现实切成格子，给格子命名，再统计和治理。",
+        "action": "信息化把销售、库存、财务、考勤等动作固化进各自的系统字段。",
+        "result": "组织第一次有了一个统一但粗糙的自己。它仍口径不一，却已经能被放在同一个地方观察。",
+        "generatedBy": "case-study@1.0.0"
+      },
+      {
+        "id": "case-airport",
+        "title": "判断从调度室搬进系统",
+        "eyebrow": "深圳机场",
+        "background": "公开分享称，机场通过数据和算法优化机位资源分配，提升廊桥机位使用效率，每年约两百六十万旅客不再经摆渡车登机。",
+        "action": "系统不只呈现机位状态，还直接给出资源分配结论。调度人员从“算方案”转为复核结果。",
+        "result": "案例中的数字仅作机制说明。关键变化不是报表更漂亮，而是判断发生的位置改变了。",
+        "generatedBy": "case-study@1.0.0"
+      },
+      {
+        "id": "case-data-silos",
+        "title": "三张完整的表，凑不成一件事",
+        "eyebrow": "数据孤岛",
+        "background": "ERP 保存订单，MES 保存工序，SCADA 保存设备数据。每套系统都工作正常，同一客户却有不同编码。",
+        "action": "尝试把订单、工序与设备异常放到一条时间线上，先遇到主数据不一致，再遇到接口缺失。",
+        "result": "有数据但对不上。治理能修，但需要标准、主数据、接口与长期投入。",
+        "generatedBy": "case-study@1.0.0"
+      },
+      {
+        "id": "case-master",
+        "title": "老师傅退休，判断也跟着退休",
+        "eyebrow": "隐性经验",
+        "background": "设备怎么调、批次为什么异常、质检靠什么判断，长期存在于手感、火候与气味中，没有被写成规则。",
+        "action": "老师傅离开后，学徒只能照猫画虎，异常处理退回试错。",
+        "result": "缺的不是管道，是内容。没有把判断说出来、写下来并标定，多少系统也学不会。",
+        "generatedBy": "case-study@1.0.0"
+      },
+      {
+        "id": "case-agent-shift",
+        "title": "从“你问它答”到“它自己检查”",
+        "eyebrow": "产品转折",
+        "background": "2023 至 2024 年，主流产品等待用户提问；2025 至 2026 年，产品开始自己规划、调用工具并检查结果。",
+        "action": "Agent 接到的不再是一个问题，而是一个带完成条件的目标。",
+        "result": "链条末端第一次可以不经过“人看一眼再动手”。中间层的定价基础随之悬空。",
+        "generatedBy": "case-study@1.0.0"
+      },
+      {
+        "id": "case-agent-approval",
+        "title": "它没有岗位，于是流程卡在第一关",
+        "eyebrow": "Agent 进厂",
+        "background": "Agent 被要求发起采购审批。现有权限系统按岗位设计，而 Agent 不是员工，没有对应工号与角色。",
+        "action": "工程师修权限，随后发现订单表和工序表对同一客户使用两个编码；遇到异常也没有明文处理规则。",
+        "result": "Agent 只能把异常抛回给人。人没有省事，反而多了一道核对。这不是智能不足，是在替前两级欠账付利息。",
+        "generatedBy": "case-study@1.0.0"
+      },
+      {
+        "id": "case-three-errors",
+        "title": "跳级、原地与换牌",
+        "eyebrow": "三种错位",
+        "background": "组织看到同一个“智能化”目标，却在完全不同的基座上行动。",
+        "action": "跳级者在地基未打时直接上 Agent；原地者在低收益行业硬上智能；换牌者改名、改叙事，却不让系统真的执行。",
+        "result": "跳级会失败，原地会亏钱，换牌最难识别，因为它从未打算交付能力。",
+        "generatedBy": "case-study@1.0.0"
+      }
+    ],
+    "qas": [
+      {
+        "id": "qa-why-order",
+        "title": "为什么三级台阶不能跳？",
+        "question": "组织直接上智能体，为什么通常会先卡在数据和流程上？",
+        "answer": "因为行动权建立在前两级已经交出的权力之上。没有统一记录，数据不干净；没有可信数据，判断不可信；判断不可信，组织就不敢让系统直接行动。跳过一级，欠账不会消失，只会在后面以失败率、核对成本和治理返工的形式出现。",
+        "generatedBy": "qa-pair@1.0.0"
+      },
+      {
+        "id": "qa-report-trap",
+        "title": "为什么报表更快，决策却没有更好？",
+        "question": "信息化投了二十年，为什么得到的是更快的报表，而不是更好的判断？",
+        "answer": "因为信息化系统按流程建模，记录单位是“谁在什么时间做了什么”，不是“这件事该不该做”。判断不在它的字段里。系统能把事实送得更快，但结论仍要人在会上给出。",
+        "generatedBy": "qa-pair@1.0.0"
+      },
+      {
+        "id": "qa-judgement-place",
+        "title": "怎么判断一套系统属于哪一级？",
+        "question": "不看供应商给它起的名字，最可靠的判断依据是什么？",
+        "answer": "看判断最终发生在哪里。系统产出报表、结论由人得出，仍属信息化；系统直接产出业务结论、人只复核，才开始进入数字化。再看动作由谁发起，才能判断是否进入智能化。",
+        "generatedBy": "qa-pair@1.0.0"
+      },
+      {
+        "id": "qa-buy-system",
+        "title": "买更多系统能补上两种缺失吗？",
+        "question": "数据孤岛与隐性经验都表现为“缺”，为什么补法不同？",
+        "answer": "数据孤岛是有数据但对不上，缺的是管道，可以通过标准、主数据和接口治理解决。隐性经验是判断从未被表达，缺的是内容，必须先把老师傅的规则说出来、写下来并标定。只买系统能修管道，不能凭空生产内容。",
+        "generatedBy": "qa-pair@1.0.0"
+      },
+      {
+        "id": "qa-agent-gap",
+        "title": "高投入、高取消、低上线，怎么同时成立？",
+        "question": "如果 Agent 不强，为什么还有大量预算进入？如果预算充足，为什么上线率仍低？",
+        "answer": "因为投入买的是未来能力，上线要求的是当下可靠性。很多 Agent 被放进数据未打通、权限未定义、异常无规则的环境，执行到第一个节点就暴露欠账。钱在加速进场，失败率也在提醒：第三级的成败取决于前两级的完成度。",
+        "generatedBy": "qa-pair@1.0.0"
+      },
+      {
+        "id": "qa-value-source",
+        "title": "你的价值有多少来自信息转手？",
+        "question": "三个时代都在清零信息不对称，企业应该怎样检查自己的暴露面？",
+        "answer": "先找出哪些收入来自“我知道你不知道”“我算得出你算不出”或“我做得到你做不到”。比例高，要准备租金消失；比例低，也要警惕别人清零之后，把你的成本结构变成被动劣势。转型意愿不能替代位置判断。",
+        "generatedBy": "qa-pair@1.0.0"
+      }
+    ],
+    "cheatsheets": [
+      {
+        "id": "cs-eras",
+        "title": "三种让权，一张表",
+        "intro": "把三个时代从预算语言还原为权力迁移。",
+        "columns": [
+          "阶段",
+          "交出去的权力",
+          "系统职责",
+          "人的位置"
+        ],
+        "rows": [
+          [
+            "信息化",
+            "记录权",
+            "统一记录事实",
+            "解释与判断"
+          ],
+          [
+            "数字化",
+            "判断权的一部分",
+            "直接产出结论",
+            "复核与例外处理"
+          ],
+          [
+            "智能化",
+            "行动权",
+            "规划、调用工具、执行",
+            "设定目标与问责边界"
+          ]
+        ],
+        "note": "顺序不是价值排序，是依赖关系。",
+        "generatedBy": "cheat-sheet@1.0.0"
+      },
+      {
+        "id": "cs-info-digital",
+        "title": "信息化与数字化的分界线",
+        "intro": "两个动词的差别，决定两张预算该验收什么。",
+        "columns": [
+          "观察点",
+          "信息化",
+          "数字化"
+        ],
+        "rows": [
+          [
+            "核心动作",
+            "连接事实",
+            "驱动判断"
+          ],
+          [
+            "典型产出",
+            "报表、台账、看板",
+            "账期结论、保养时点、路线分配"
+          ],
+          [
+            "结论位置",
+            "人的会上",
+            "系统输出，人复核"
+          ],
+          [
+            "缺失风险",
+            "系统多但流程未重构",
+            "有数据但对不上，或根本没有内容"
+          ]
+        ],
+        "note": "名称不决定层级，结论生成位置才决定层级。",
+        "generatedBy": "cheat-sheet@1.0.0"
+      },
+      {
+        "id": "cs-digital",
+        "title": "数字化卡点：管道还是内容",
+        "intro": "同样是“数据不够”，治理路径完全不同。",
+        "columns": [
+          "卡点",
+          "表现",
+          "缺什么",
+          "解法"
+        ],
+        "rows": [
+          [
+            "数据孤岛",
+            "三张表都完整，合不到一起",
+            "管道",
+            "标准、主数据、接口治理"
+          ],
+          [
+            "隐性经验",
+            "规则从未进入系统",
+            "内容",
+            "说出判断、写下规则、逐次标定"
+          ],
+          [
+            "常见误判",
+            "都以为再买一套系统",
+            "辨别",
+            "先判断缺的是连接还是知识"
+          ]
+        ],
+        "note": "数字化最难的往往不是算不出来，是没有可算的东西。",
+        "generatedBy": "cheat-sheet@1.0.0"
+      },
+      {
+        "id": "cs-ready",
+        "title": "上 Agent 前的三项体检",
+        "intro": "不看用了多少 Agent，先看行动权有没有可靠落点。",
+        "columns": [
+          "检查项",
+          "通过标准",
+          "不通过时会发生什么"
+        ],
+        "rows": [
+          [
+            "数据可读",
+            "机器能直接读取，编码一致",
+            "任务在第一步遇到错误前提"
+          ],
+          [
+            "流程可复述",
+            "关键路径写到可以逐步执行",
+            "权限与角色缺失，流程卡死"
+          ],
+          [
+            "异常有规则",
+            "例外处理有明文边界",
+            "异常被抛回给人，核对反而增加"
+          ]
+        ],
+        "note": "三项都没有，买的不是智能，是一个更贵的接口。",
+        "generatedBy": "cheat-sheet@1.0.0"
+      },
+      {
+        "id": "cs-quote",
+        "title": "位置判断清单",
+        "intro": "用四个问题确定当前台阶，避免把路线图当体检表。",
+        "columns": [
+          "问题",
+          "是",
+          "否"
+        ],
+        "rows": [
+          [
+            "事实是否已有统一记录？",
+            "记录权已迁移",
+            "仍停在信息化之前"
+          ],
+          [
+            "系统是否直接给出业务结论？",
+            "判断权开始迁移",
+            "仍由人在会上判断"
+          ],
+          [
+            "结论能否直接触发可靠动作？",
+            "行动权开始迁移",
+            "仍是建议系统"
+          ],
+          [
+            "价值是否高度依赖信息转手？",
+            "租金正在消失",
+            "仍可能被成本结构挤压"
+          ]
+        ],
+        "note": "先看自己站在哪，再决定往哪走。",
+        "generatedBy": "cheat-sheet@1.0.0"
+      },
+      {
+        "id": "cs-closing",
+        "title": "一条链，四次交棒",
+        "intro": "把全章压缩成四个动作与四个回响。",
+        "columns": [
+          "你交出",
+          "系统回应",
+          "认知变化"
+        ],
+        "rows": [
+          [
+            "单子交给纸",
+            "账本",
+            "事实可留存"
+          ],
+          [
+            "账本交给系统",
+            "报表",
+            "组织看清自己"
+          ],
+          [
+            "报表交给模型",
+            "结论",
+            "判断开始迁移"
+          ],
+          [
+            "结论交给智能体",
+            "一串动作",
+            "行动权离开人手"
+          ]
+        ],
+        "note": "每一次交棒都扩大能力，也重新定价原来的中间环节。",
+        "generatedBy": "cheat-sheet@1.0.0"
+      }
+    ],
+    "slides": [
+      {
+        "id": "sl-digital",
+        "title": "判断发生在哪里？",
+        "eyebrow": "数字化判据 · 01",
+        "lead": "不要问系统叫什么，问结论最后从哪里出来。",
+        "slides": [
+          {
+            "kicker": "信息化",
+            "title": "事实被送到人面前",
+            "body": "报表、台账与看板缩短了信息传递时间。结论仍在会上形成。",
+            "marker": "连接"
+          },
+          {
+            "kicker": "数字化",
+            "title": "系统直接给出业务结论",
+            "body": "账期、保养时点、货物流向由系统计算，人负责复核与例外。",
+            "marker": "驱动"
+          },
+          {
+            "kicker": "分界",
+            "title": "产出物决定层级",
+            "body": "不是有没有模型，而是模型是否占据了最终判断的位置。",
+            "marker": "位置"
+          }
+        ],
+        "generatedBy": "slide-deck@1.0.0"
+      }
+    ],
+    "maps": [
+      {
+        "id": "m-course",
+        "title": "全章路线",
+        "eyebrow": "章节导图",
+        "root": "三个时代的变迁",
+        "branches": [
+          {
+            "title": "问题",
+            "items": [
+              "概念混用",
+              "预算失焦",
+              "问责断裂"
+            ]
+          },
+          {
+            "title": "机制",
+            "items": [
+              "记录权",
+              "判断权",
+              "行动权"
+            ]
+          },
+          {
+            "title": "落点",
+            "items": [
+              "看清位置",
+              "识别错位",
+              "判断暴露面"
+            ]
+          }
+        ],
+        "note": "本章不是技术编年史，而是一条让权依赖链。",
+        "generatedBy": "chapter-map@1.0.0"
+      },
+      {
+        "id": "m-info",
+        "title": "信息化的边界",
+        "eyebrow": "第二级导图",
+        "root": "把流程固化进系统",
+        "branches": [
+          {
+            "title": "交出去",
+            "items": [
+              "记录方式",
+              "字段口径",
+              "流程节点"
+            ]
+          },
+          {
+            "title": "得到",
+            "items": [
+              "统一事实",
+              "可查询",
+              "可汇总"
+            ]
+          },
+          {
+            "title": "仍保留",
+            "items": [
+              "解释权",
+              "业务判断",
+              "最终决策"
+            ]
+          }
+        ],
+        "note": "看清自己，不等于变聪明。",
+        "generatedBy": "chapter-map@1.0.0"
+      },
+      {
+        "id": "m-agent",
+        "title": "Agent 的位置",
+        "eyebrow": "第三级导图",
+        "root": "行动权开始迁移",
+        "branches": [
+          {
+            "title": "系统承接",
+            "items": [
+              "规划",
+              "调用工具",
+              "执行",
+              "检查结果"
+            ]
+          },
+          {
+            "title": "组织前置",
+            "items": [
+              "数据可读",
+              "流程可复述",
+              "异常有规则"
+            ]
+          },
+          {
+            "title": "治理必答",
+            "items": [
+              "角色与权限",
+              "问责边界",
+              "停手条件"
+            ]
+          }
+        ],
+        "note": "第三级的门槛不是演示，而是可靠地完成一整条动作链。",
+        "generatedBy": "chapter-map@1.0.0"
+      },
+      {
+        "id": "m-final",
+        "title": "体检表，不是路线图",
+        "eyebrow": "结尾导图",
+        "root": "看清当前台阶",
+        "branches": [
+          {
+            "title": "三种错位",
+            "items": [
+              "跳级",
+              "原地",
+              "换牌"
+            ]
+          },
+          {
+            "title": "三层清零",
+            "items": [
+              "看见",
+              "算出",
+              "做到"
+            ]
+          },
+          {
+            "title": "一个动作",
+            "items": [
+              "找出信息转手收入",
+              "判断暴露面",
+              "决定让权顺序"
+            ]
+          }
+        ],
+        "note": "先确定位置，再决定投入。",
+        "generatedBy": "chapter-map@1.0.0"
+      }
+    ]
+  },
+  "engineSnapshot": {
+    "status": "ready",
+    "provider": "local-deterministic",
+    "pipeline": [
+      {
+        "id": "base",
+        "name": "内容基座构建",
+        "state": "completed",
+        "count": 12
+      },
+      {
+        "id": "segment",
+        "name": "讲稿切分",
+        "state": "completed",
+        "count": 46
+      },
+      {
+        "id": "label",
+        "name": "同步标注",
+        "state": "completed",
+        "count": 46
+      },
+      {
+        "id": "media",
+        "name": "介质生成",
+        "state": "completed",
+        "count": 39
+      },
+      {
+        "id": "mount",
+        "name": "挂载编排",
+        "state": "completed",
+        "count": 39
+      },
+      {
+        "id": "validate",
+        "name": "验收分析",
+        "state": "completed",
+        "count": 4
+      }
+    ],
+    "skills": [
+      {
+        "id": "concept-extract",
+        "name": "概念提取",
+        "stage": "analysis",
+        "enabled": true,
+        "version": "1.0.0"
+      },
+      {
+        "id": "block-label",
+        "name": "块标注",
+        "stage": "analysis",
+        "enabled": true,
+        "version": "1.0.0"
+      },
+      {
+        "id": "concept-card",
+        "name": "概念卡",
+        "stage": "media",
+        "enabled": true,
+        "version": "1.0.0"
+      },
+      {
+        "id": "case-study",
+        "name": "案例条目",
+        "stage": "media",
+        "enabled": true,
+        "version": "1.0.0"
+      },
+      {
+        "id": "qa-pair",
+        "name": "问答条目",
+        "stage": "media",
+        "enabled": true,
+        "version": "1.0.0"
+      },
+      {
+        "id": "cheat-sheet",
+        "name": "速查表",
+        "stage": "media",
+        "enabled": true,
+        "version": "1.0.0"
+      },
+      {
+        "id": "slide-deck",
+        "name": "课件页",
+        "stage": "media",
+        "enabled": true,
+        "version": "1.0.0"
+      },
+      {
+        "id": "chapter-map",
+        "name": "章节导图",
+        "stage": "media",
+        "enabled": true,
+        "version": "1.0.0"
+      },
+      {
+        "id": "mount-planner",
+        "name": "挂载编排",
+        "stage": "orchestration",
+        "enabled": true,
+        "version": "1.0.0"
+      },
+      {
+        "id": "validation",
+        "name": "验收分析",
+        "stage": "quality",
+        "enabled": true,
+        "version": "1.0.0"
+      }
+    ]
+  },
+  "suggestions": []
+}
