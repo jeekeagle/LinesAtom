@@ -150,7 +150,8 @@ function parseModelSuggestions(raw: unknown): MountSuggestion[] {
 export async function generateSuggestions(
   project: LectureProject,
   skills: AgentSkill[],
-  settings: RuntimeSettings
+  settings: RuntimeSettings,
+  apiKey?: string
 ): Promise<{ suggestions: MountSuggestion[]; provider: string; warnings: string[] }> {
   const warnings: string[] = [];
   const skill = skillOf(skills, 'mount-advisor');
@@ -165,7 +166,8 @@ export async function generateSuggestions(
         skill,
         project.blocks.map((block) => `${block.id}\t${block.text.slice(0, 100)}`).join('\n'),
         settings,
-        `讲稿标签与块内容：\n${context}`
+        `讲稿标签与块内容：\n${context}`,
+      apiKey
       );
       if (result.parsed) {
         const parsed = parseModelSuggestions(result.parsed);

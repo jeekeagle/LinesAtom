@@ -36,20 +36,7 @@ export function RuntimeDrawer() {
         </header>
 
         <div className="drawer-body">
-          {runtimeTrace?.steps?.length ? (
-            <ol className="trace-list">
-              {runtimeTrace.steps.map((step) => (
-                <li key={step.id} className={`trace-item is-${step.state}`}>
-                  <CircleDot size={13} />
-                  <div>
-                    <strong>{step.label}</strong>
-                    <span>{step.detail}</span>
-                  </div>
-                  <em>{step.durationMs}ms</em>
-                </li>
-              ))}
-            </ol>
-          ) : null}
+          {runtimeTrace?.steps?.length ? <TraceSteps steps={runtimeTrace.steps} /> : null}
 
           <div className="drawer-section">
             <h3>历史运行</h3>
@@ -64,6 +51,12 @@ export function RuntimeDrawer() {
                     <p>
                       {run.mode} · {run.provider} · {run.durationMs}ms
                     </p>
+                    {run.trace?.length ? (
+                      <details className="run-trace">
+                        <summary>展开 {run.trace.length} 步轨迹</summary>
+                        <TraceSteps steps={run.trace} />
+                      </details>
+                    ) : null}
                     {run.warnings.length ? (
                       <ul className="run-warnings">
                         {run.warnings.map((warning) => (
@@ -81,5 +74,23 @@ export function RuntimeDrawer() {
         </div>
       </aside>
     </>
+  );
+}
+
+/** 轨迹步骤：当前运行与历史运行共用一套渲染。 */
+function TraceSteps({ steps }: { steps: { id: string; label: string; detail: string; state: string; durationMs: number }[] }) {
+  return (
+    <ol className="trace-list">
+      {steps.map((step) => (
+        <li key={step.id} className={`trace-item is-${step.state}`}>
+          <CircleDot size={13} />
+          <div>
+            <strong>{step.label}</strong>
+            <span>{step.detail}</span>
+          </div>
+          <em>{step.durationMs}ms</em>
+        </li>
+      ))}
+    </ol>
   );
 }

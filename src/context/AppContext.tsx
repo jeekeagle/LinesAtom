@@ -69,7 +69,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
     (updater: BootstrapData | ((prev: BootstrapData) => BootstrapData)) => {
       setDataState((prev) => {
         if (!prev) return prev;
-        return typeof updater === 'function' ? updater(prev) : updater;
+        const next = typeof updater === 'function' ? updater(prev) : updater;
+        // 局部接口响应只覆盖它自己那几个字段，其余字段一律沿用上一份，
+        // 避免某个响应少带一个集合就把整页数据打成 undefined。
+        const patched = { ...next } as Record<string, unknown>;
+        const previous = prev as unknown as Record<string, unknown>;
+        for (const key of Object.keys(previous)) {
+          if (patched[key] === undefined && previous[key] !== undefined) patched[key] = previous[key];
+        }
+        return patched as unknown as BootstrapData;
       });
     },
     []

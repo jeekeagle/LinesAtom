@@ -78,6 +78,20 @@ export interface LectureRunPayload {
   questionRatioFloor: number;
 }
 
+export interface EngineParamPlan {
+  key: string;
+  label: string;
+  value: number;
+  source: string;
+}
+
+export interface EngineRunUsage {
+  analysis: string;
+  script: string;
+  mount: string;
+  quality: string;
+  media: string[];
+}
 export const api = {
   bootstrap: () => request<BootstrapData>('/api/bootstrap'),
 
@@ -250,7 +264,15 @@ export const api = {
       validation: ValidationReport;
       trace: TraceStep[];
       warnings: string[];
+      enginesUsed: EngineRunUsage;
+      effective: EngineParamPlan[];
     }>('/api/lecture/run', { method: 'POST', body: JSON.stringify(payload) }),
+
+  enginePlan: () =>
+    request<{
+      effective: EngineParamPlan[];
+      enginesUsed: EngineRunUsage;
+    }>('/api/engines/plan'),
 
   relabel: () =>
     request<{
@@ -322,6 +344,22 @@ export const api = {
       body: JSON.stringify(payload)
     }),
 
+  trialEngine: (id: string, input: string) =>
+    request<{
+      skill: AgentSkill;
+      skills: AgentSkill[];
+      engines: ProductionEngine[];
+      output: unknown;
+      provider: string;
+      model: string;
+      fallback: boolean;
+      warning?: string;
+    }>(`/api/engines/${id}/trial`, { method: 'POST', body: JSON.stringify({ input }) }),
+  cloneEngine: (id: string) =>
+    request<{ engines: ProductionEngine[] }>(`/api/engines/${id}/clone`, {
+      method: 'POST',
+      body: JSON.stringify({})
+    }),
   deleteEngine: (id: string) =>
     request<{ engines: ProductionEngine[] }>(`/api/engines/${id}`, { method: 'DELETE' }),
 

@@ -6,6 +6,7 @@ import type {
   LectureMode,
   LectureProject,
   ProductionEngine,
+  ProductionStage,
   ValidationReport
 } from '../src/types';
 import { APP_VERSION, DEFAULT_PORT, LABEL_TEXT, MEDIA_TEXT, MOUNT_RULES, MODE_TEXT, STAGE_TEXT } from './constants';
@@ -13,6 +14,7 @@ import { dataDir, distRoot } from './paths';
 import { mutateDb, pushActivity, pushRun, readDb, resetDb, writeDb } from './store';
 import { runLecturePipeline, type LectureRunInput } from './lecture';
 import { validateProject } from './validate';
+import { defaultEngineForStage, planEngineRun } from './engines';
 import {
   clearApiKey,
   clearServiceKey,
@@ -24,6 +26,7 @@ import {
 } from './llm';
 import { DEFAULT_SETTINGS } from './seed';
 import { runSkillWithModel } from './skills';
+import { resolveModel } from './llm';
 import { applySuggestion, confidenceFloor, generateSuggestions, rejectSuggestion } from './suggest';
 import {
   estimateLectureSeconds,
@@ -474,7 +477,14 @@ api.post('/skills/:id/run', async (req, res) => {
     return;
   }
   try {
-    const result = await runSkillWithModel(skill, input, db.settings);
+    const model = resolveModel(db);
+  const result = await runSkillWithModel(
+    skill,
+    input,
+    { ...db.settings, modelBaseUrl: model.modelBaseUrl, modelName: model.modelName },
+    '',
+    model.apiKey
+  );
     const updated = mutateDb((store) => {
       const target = store.skills.find((item) => item.id === skill.id);
       if (!target) return;
@@ -551,6 +561,109 @@ api.delete('/engines/:id', (req, res) => {
   res.json({ engines: db.engines });
 });
 
+api.post('/engines/:id/clone', (req, res) => {
+  const db = mutateDb((store) => {
+    const source = store.engines.find((item) => item.id === req.params.id);
+    if (!source) return;
+    const timestamp = new Date().toISOString();
+    const copy: ProductionEngine = {
+      ...source,
+      id: `engine-${Date.now().toString(36)}`,
+      name: `${source.name}（副本）`,
+      isDefault: false,
+      builtIn: false,
+      runs: 0,
+      lastRun: '尚未运行',
+      createdAt: timestamp,
+      updatedAt: timestamp,
+      config: { ...source.config }
+    };
+    store.engines = [copy, ...store.engines];
+    pushActivity(store, {
+      kind: 'engine',
+      title: `复制介质引擎：${copy.name}`,
+      detail: `来源 ${source.id}`
+    });
+  });
+  res.json({ engines: db.engines });
+});
+api.post('/engines/:id/trial', async (req, res) => {
+  const db = readDb();
+  const engine = db.engines.find((item) => item.id === req.params.id);
+  if (!engine) {
+    res.status(404).json({ message: '引擎不存在' });
+    return;
+  }
+  const skillId = engine.skillIds.find((id) =>
+    db.skills.some((skill) => skill.id === id && skill.enabled)
+  );
+  if (!skillId) {
+    res.status(400).json({ message: '引擎还没有绑定可用技能' });
+    return;
+  }
+  const input = String(req.body?.input ?? '').trim();
+  if (!input) {
+    res.status(400).json({ message: '缺少试运行输入' });
+    return;
+  }
+  const skill = db.skills.find((item) => item.id === skillId);
+  if (!skill) {
+    res.status(404).json({ message: '技能不存在' });
+    return;
+  }
+  try {
+    const model = resolveModel(db);
+    const result = await runSkillWithModel(
+      skill,
+      input,
+      { ...db.settings, modelBaseUrl: model.modelBaseUrl, modelName: model.modelName },
+      '',
+      model.apiKey
+    );
+    const updated = mutateDb((store) => {
+      const target = store.skills.find((item) => item.id === skillId);
+      if (target) {
+        target.runs += 1;
+        target.lastRun = new Date().toISOString();
+      }
+      const engineTarget = store.engines.find((item) => item.id === engine.id);
+      if (engineTarget) {
+        engineTarget.runs += 1;
+        engineTarget.lastRun = new Date().toISOString();
+      }
+      pushActivity(store, {
+        kind: 'engine',
+        title: `试运行：${engine.name}`,
+        detail: `${skill.name} · ${model.source}`
+      });
+    });
+    res.json({
+      skill: updated.skills.find((item) => item.id === skillId),
+      skills: updated.skills,
+      engines: updated.engines,
+      output: result.parsed ?? '本地确定性引擎处理完成。',
+      provider: result.provider,
+      model: result.model,
+      fallback: result.fallback,
+      warning: result.warning
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error instanceof Error ? error.message : '试运行失败'
+    });
+  }
+});
+api.get('/engines/plan', (_req, res) => {
+  const db = readDb();
+  const plan = planEngineRun(db.engines, {
+    blockTargetChars: db.settings.blockTargetChars,
+    questionRatioFloor: db.settings.questionRatioFloor,
+    cognitiveLoadCap: db.settings.cognitiveLoadCap,
+    charsPerMinute: db.settings.charsPerMinute,
+    durationMinutes: db.project.meta.durationMinutes ?? 28
+  });
+  res.json({ effective: plan.effective, enginesUsed: plan.enginesUsed });
+});
 api.get('/engines', (_req, res) => {
   res.json({ engines: readDb().engines, stageLabels: STAGE_TEXT });
 });
@@ -1092,8 +1205,41 @@ api.post('/lecture/run', async (req, res) => {
     return;
   }
 
+  // 流水线参数以各阶段默认引擎为准：引擎是参数的唯一来源，页面只提供兜底值。
+  const stageEngine = (stage: ProductionStage) => defaultEngineForStage(db.engines, stage);
+  const numOf = (value: unknown) =>
+    typeof value === 'number' && Number.isFinite(value) ? value : undefined;
+  const analysisEngine = stageEngine('analysis');
+  const scriptEngine = stageEngine('script');
+  const mountEngine = stageEngine('mount');
+  const qualityEngine = stageEngine('quality');
+  const mediaEngines = db.engines.filter(
+    (engine) => engine.stage === 'media' && engine.enabled
+  );
+  const plan = planEngineRun(db.engines, {
+    blockTargetChars: input.blockTargetChars,
+    questionRatioFloor: input.questionRatioFloor,
+    cognitiveLoadCap: input.cognitiveLoadCap,
+    charsPerMinute: input.charsPerMinute,
+    durationMinutes: input.durationMinutes
+  });
+  const effective = plan.effective;
+  for (const item of effective) {
+    if (item.source === '流水线兜底值') continue;
+    (input as unknown as Record<string, number>)[item.key] = item.value;
+  }
+  const enginesUsed = plan.enginesUsed;
+
+
   try {
     const result = await runLecturePipeline(input, db.skills, db.settings);
+    result.trace.unshift({
+      id: 'engine-plan',
+      label: '引擎编排',
+      state: 'done',
+      detail: `分析 ${enginesUsed.analysis} · 讲稿 ${enginesUsed.script} · 挂载 ${enginesUsed.mount} · 介质 ${enginesUsed.media.length} 个 · 验收 ${enginesUsed.quality}`,
+      durationMs: 0
+    });
     const runId = `run-${Date.now()}`;
     result.project.meta.engineRunId = runId;
     result.project.meta.generatedAt = new Date().toISOString();
@@ -1134,7 +1280,14 @@ api.post('/lecture/run', async (req, res) => {
     });
 
     const validation = validateProject(updated.project);
-    res.json({ project: updated.project, validation, trace: result.trace, warnings: result.warnings });
+    res.json({
+      project: updated.project,
+      validation,
+      trace: result.trace,
+      warnings: result.warnings,
+      enginesUsed,
+      effective
+    });
   } catch (error) {
     res.status(422).json({
       message: error instanceof Error ? error.message : '流水线执行失败'
@@ -1216,7 +1369,13 @@ api.get('/lecture/suggestions', (_req, res) => {
 api.post('/lecture/suggestions', async (_req, res) => {
   const db = readDb();
   try {
-    const result = await generateSuggestions(db.project, db.skills, db.settings);
+    const model = resolveModel(db);
+    const result = await generateSuggestions(
+      db.project,
+      db.skills,
+      { ...db.settings, modelBaseUrl: model.modelBaseUrl, modelName: model.modelName },
+      model.apiKey
+    );
     const updated = mutateDb((store) => {
       store.project = { ...store.project, suggestions: result.suggestions };
       pushActivity(store, {

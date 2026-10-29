@@ -209,3 +209,72 @@ export function setEngineDefault(engines: ProductionEngine[], engineId: string):
   target.updatedAt = new Date().toISOString();
   return true;
 }
+/** 流水线参数由各阶段默认引擎决定，页面只提供兜底值。 */
+export interface EngineParamPlan {
+  key: string;
+  label: string;
+  value: number;
+  source: string;
+}
+
+export interface EngineRunPlan {
+  effective: EngineParamPlan[];
+  enginesUsed: {
+    analysis: string;
+    script: string;
+    mount: string;
+    quality: string;
+    media: string[];
+  };
+  stageEngines: Partial<Record<ProductionStage, ProductionEngine>>;
+}
+
+const PARAM_SOURCES: { key: string; label: string; stages: ProductionStage[] }[] = [
+  { key: 'blockTargetChars', label: '块目标字数', stages: ['script'] },
+  { key: 'questionRatioFloor', label: '设问占比下限', stages: ['quality', 'script'] },
+  { key: 'cognitiveLoadCap', label: '认知负荷上限', stages: ['script', 'analysis'] },
+  { key: 'charsPerMinute', label: '字数每分钟', stages: ['script'] },
+  { key: 'durationMinutes', label: '目标时长（分钟）', stages: ['script'] }
+];
+
+const numOf = (value: unknown) =>
+  typeof value === 'number' && Number.isFinite(value) ? value : undefined;
+
+export function planEngineRun(
+  engines: ProductionEngine[],
+  fallback: Record<string, number>
+): EngineRunPlan {
+  const stageEngine = (stage: ProductionStage) => defaultEngineForStage(engines, stage);
+  const stageEngines: Partial<Record<ProductionStage, ProductionEngine>> = {
+    analysis: stageEngine('analysis'),
+    script: stageEngine('script'),
+    mount: stageEngine('mount'),
+    quality: stageEngine('quality')
+  };
+  const effective = PARAM_SOURCES.map((item) => {
+    for (const stage of item.stages) {
+      const engine = stageEngines[stage];
+      const value = numOf(engine?.config[item.key]);
+      if (engine && value !== undefined) {
+        return { key: item.key, label: item.label, value, source: engine.name };
+      }
+    }
+    return {
+      key: item.key,
+      label: item.label,
+      value: fallback[item.key] ?? 0,
+      source: '流水线兜底值'
+    };
+  });
+  return {
+    effective,
+    stageEngines,
+    enginesUsed: {
+      analysis: stageEngines.analysis?.name ?? '未配置',
+      script: stageEngines.script?.name ?? '未配置',
+      mount: stageEngines.mount?.name ?? '未配置',
+      quality: stageEngines.quality?.name ?? '未配置',
+      media: engines.filter((engine) => engine.stage === 'media' && engine.enabled).map((engine) => engine.name)
+    }
+  };
+}

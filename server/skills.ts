@@ -216,11 +216,12 @@ export async function runSkillWithModel(
   skill: AgentSkill,
   input: string,
   settings: RuntimeSettings,
-  context = ''
+  context = '',
+  apiKey?: string
 ): Promise<SkillRunOutput> {
   const startedAt = Date.now();
   try {
-    const response = await callModel(settings, {
+    const response = await callModel({ ...settings, apiKey }, {
       messages: buildSkillMessages(skill, input, context),
       json: true,
       temperature: settings.temperature,

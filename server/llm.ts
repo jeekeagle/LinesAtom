@@ -179,3 +179,42 @@ export async function testModel(settings: {
     message: '模型服务可用'
   };
 }
+
+/** 解析当前真正生效的模型：优先用激活的 chat 服务档案，其次回落全局设置。 */
+export interface ResolvedModel {
+  modelBaseUrl: string;
+  modelName: string;
+  temperature: number;
+  maxTokens: number;
+  apiKey?: string;
+  source: string;
+}
+
+export function resolveModel(db: {
+  services: { id: string; kind: string; name: string; baseUrl: string; model: string; active: boolean }[];
+  settings: { modelBaseUrl: string; modelName: string; temperature: number; maxTokens: number };
+}): ResolvedModel {
+  const secrets = readSecrets();
+  const service = db.services.find((item) => item.kind === 'chat' && item.active);
+  if (service) {
+    const apiKey = getServiceKey(service.id) ?? secrets.modelApiKey;
+    if (service.baseUrl && service.model && apiKey) {
+      return {
+        modelBaseUrl: service.baseUrl,
+        modelName: service.model,
+        temperature: db.settings.temperature,
+        maxTokens: db.settings.maxTokens,
+        apiKey,
+        source: service.name
+      };
+    }
+  }
+  return {
+    modelBaseUrl: db.settings.modelBaseUrl,
+    modelName: db.settings.modelName,
+    temperature: db.settings.temperature,
+    maxTokens: db.settings.maxTokens,
+    apiKey: secrets.modelApiKey,
+    source: '全局模型设置'
+  };
+}
