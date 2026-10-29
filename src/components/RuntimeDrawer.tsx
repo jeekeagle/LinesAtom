@@ -75,7 +75,7 @@ export function RuntimeDrawer() {
                 ))}
               </ul>
             ) : (
-              <p className="muted-text">还没有运行记录。到引擎台跑一次流水线。</p>
+          <p className="muted-text">还没有运行记录。到介质引擎跑一次流水线。</p>
             )}
           </div>
         </div>

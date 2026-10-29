@@ -316,6 +316,15 @@ export const api = {
   engines: () =>
     request<{ engines: ProductionEngine[]; stageLabels: Record<string, string> }>('/api/engines'),
 
+  createEngine: (payload: Partial<ProductionEngine> & { name: string }) =>
+    request<{ engines: ProductionEngine[] }>('/api/engines', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    }),
+
+  deleteEngine: (id: string) =>
+    request<{ engines: ProductionEngine[] }>(`/api/engines/${id}`, { method: 'DELETE' }),
+
   updateEngine: (id: string, payload: Partial<ProductionEngine>) =>
     request<{ engines: ProductionEngine[] }>(`/api/engines/${id}`, {
       method: 'PATCH',

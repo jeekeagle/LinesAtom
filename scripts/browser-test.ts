@@ -182,7 +182,7 @@ const run = async () => {
     ['/structure', '.concept-tree', '结构台'],
     ['/workflows', '.workflow-grid', '流程台'],
     ['/skills', '.skill-grid', '技能台'],
-    ['/engines', '.engine-config-grid', '引擎台'],
+    ['/engines', '.engine-config-grid', '介质引擎'],
     ['/settings', '.engine-config-grid', '设置台']
   ] as const) {
     await page.goto(`${BASE}${path}`, { waitUntil: 'networkidle' });

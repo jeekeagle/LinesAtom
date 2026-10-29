@@ -3,6 +3,7 @@ dist/
 data/store.json
 data/secrets.json
 data/*.log
+data/*.png
 screenshots/
 .DS_Store
 *.tmp

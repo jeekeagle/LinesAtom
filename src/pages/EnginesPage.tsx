@@ -1,14 +1,42 @@
 import { useState } from 'react';
-import { Play, RefreshCw, Save, Star } from 'lucide-react';
+import { Pencil, Play, Plus, RefreshCw, Save, Star, Trash2, X } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { api } from '../lib/api';
 import { Badge, Field, Section, Toggle } from '../components/ui';
-import type { LectureMode } from '../types';
+import type { EngineKind, LectureMode, ProductionStage } from '../types';
+
+interface EngineDraft {
+  name: string;
+  description: string;
+  stage: ProductionStage;
+  kind: EngineKind;
+  skillIds: string[];
+}
+
+const EMPTY_ENGINE: EngineDraft = {
+  name: '',
+  description: '',
+  stage: 'media',
+  kind: 'media',
+  skillIds: []
+};
+
+const KIND_TEXT: Record<EngineKind, string> = {
+  analysis: '分析',
+  text: '文本',
+  structure: '结构',
+  media: '介质',
+  quality: '质量'
+};
 
 export function EnginesPage() {
   const { data, setData, showToast, pushRuntime, runMode, setRunMode } = useApp();
   const [running, setRunning] = useState(false);
   const [result, setResult] = useState<{ summary: string; warnings: string[] } | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [creating, setCreating] = useState(false);
+  const [engineDraft, setEngineDraft] = useState<EngineDraft>(EMPTY_ENGINE);
+  const [savingEngine, setSavingEngine] = useState(false);
   const [form, setForm] = useState({
     topic: '',
     title: '',
@@ -41,6 +69,61 @@ export function EnginesPage() {
       showToast('默认引擎已切换');
     } catch (error) {
       showToast(error instanceof Error ? error.message : '切换失败', 'error');
+    }
+  };
+
+  const openCreate = () => {
+    setEditingId(null);
+    setEngineDraft(EMPTY_ENGINE);
+    setCreating(true);
+  };
+
+  const openEdit = (engine: (typeof engines)[number]) => {
+    setCreating(false);
+    setEditingId(engine.id);
+    setEngineDraft({
+      name: engine.name,
+      description: engine.description,
+      stage: engine.stage,
+      kind: engine.kind,
+      skillIds: [...engine.skillIds]
+    });
+  };
+
+  const closeEditor = () => {
+    setCreating(false);
+    setEditingId(null);
+  };
+
+  const saveEngine = async () => {
+    if (!engineDraft.name.trim()) {
+      showToast('介质引擎需要名称', 'error');
+      return;
+    }
+    setSavingEngine(true);
+    try {
+      const result = creating
+        ? await api.createEngine(engineDraft)
+        : await api.updateEngine(editingId!, engineDraft);
+      setData((prev) => (prev ? { ...prev, engines: result.engines } : prev));
+      showToast(creating ? '介质引擎已新建' : '介质引擎已更新');
+      closeEditor();
+    } catch (error) {
+      showToast(error instanceof Error ? error.message : '保存失败', 'error');
+    } finally {
+      setSavingEngine(false);
+    }
+  };
+
+  const removeEngine = async (engine: (typeof engines)[number]) => {
+    if (!window.confirm(`删除介质引擎「${engine.name}」？`)) return;
+    try {
+      const result = await api.deleteEngine(engine.id);
+      setData((prev) => (prev ? { ...prev, engines: result.engines } : prev));
+      if (editingId === engine.id) closeEditor();
+      showToast('介质引擎已删除');
+    } catch (error) {
+      showToast(error instanceof Error ? error.message : '删除失败', 'error');
     }
   };
 
@@ -120,13 +203,17 @@ export function EnginesPage() {
       <div className="workspace-inner">
         <header className="workspace-head">
           <div>
-            <div className="course-kicker">ENGINES · 引擎台</div>
+            <div className="course-kicker">MEDIUM ENGINES · 介质引擎</div>
             <h1>介质引擎</h1>
             <p>
-              引擎按阶段编排技能：析课、切分标注、介质生成、挂载编排与验收。停用某个技能，产物与验收会立刻体现差别。
+              每个引擎按阶段编排一组技能：析课、切分标注、介质生成、挂载编排与验收。点击引擎可修改，也可以新建。
             </p>
           </div>
           <div className="button-row">
+            <button className="button button-secondary button-md" type="button" onClick={openCreate}>
+              <Plus size={15} />
+              新建引擎
+            </button>
             <button className="button button-secondary button-md" type="button" onClick={() => void relabel()} disabled={running}>
               <RefreshCw size={15} />
               重算标注与挂载
@@ -253,6 +340,21 @@ export function EnginesPage() {
           ) : null}
         </Section>
 
+        {creating ? (
+          <Section title="新建介质引擎" meta="编排一组技能，按阶段参与流水线">
+            <EngineEditor
+              draft={engineDraft}
+              onChange={(patch) => setEngineDraft((prev) => ({ ...prev, ...patch }))}
+              skills={data.skills}
+              stageLabels={data.stageLabels}
+              creating
+              busy={savingEngine}
+              onSave={() => void saveEngine()}
+              onCancel={closeEditor}
+            />
+          </Section>
+        ) : null}
+
         {stages.map((stage) => (
           <Section
             key={stage}
@@ -301,7 +403,34 @@ export function EnginesPage() {
                         {engine.isDefault ? '默认引擎' : '设为默认'}
                       </button>
                       {engine.isDefault ? <Badge tone="ok">默认</Badge> : null}
+                      <button
+                        className="button button-ghost button-sm"
+                        type="button"
+                        onClick={() => openEdit(engine)}
+                      >
+                        <Pencil size={14} />
+                        {editingId === engine.id ? '收起' : '编辑'}
+                      </button>
+                      <button
+                        className="icon-button is-danger"
+                        type="button"
+                        title="删除引擎"
+                        onClick={() => void removeEngine(engine)}
+                      >
+                        <Trash2 size={14} />
+                      </button>
                     </div>
+                    {editingId === engine.id ? (
+                      <EngineEditor
+                        draft={engineDraft}
+                        onChange={(patch) => setEngineDraft((prev) => ({ ...prev, ...patch }))}
+                        skills={data.skills}
+                        stageLabels={data.stageLabels}
+                        busy={savingEngine}
+                        onSave={() => void saveEngine()}
+                        onCancel={closeEditor}
+                      />
+                    ) : null}
                   </article>
                 ))}
             </div>
@@ -345,6 +474,119 @@ function ConfigEditor({
         <Save size={14} />
         保存 {engineId}
       </button>
+    </div>
+  );
+}
+
+/** 引擎编辑器：改名、换阶段与类型、增删绑定技能。 */
+function EngineEditor({
+  draft,
+  onChange,
+  skills,
+  stageLabels,
+  creating,
+  busy,
+  onSave,
+  onCancel
+}: {
+  draft: EngineDraft;
+  onChange: (patch: Partial<EngineDraft>) => void;
+  skills: { id: string; name: string }[];
+  stageLabels: Record<string, string>;
+  creating?: boolean;
+  busy?: boolean;
+  onSave: () => void;
+  onCancel: () => void;
+}) {
+  const toggleSkill = (id: string) => {
+    onChange({
+      skillIds: draft.skillIds.includes(id)
+        ? draft.skillIds.filter((item) => item !== id)
+        : [...draft.skillIds, id]
+    });
+  };
+
+  return (
+    <div className="engine-editor">
+      <div className="engine-editor-head">
+        <h4>{creating ? '填写引擎信息' : '编辑介质引擎'}</h4>
+        <button className="icon-button" type="button" title="收起编辑" onClick={onCancel}>
+          <X size={15} />
+        </button>
+      </div>
+      <div className="engine-config-grid">
+        <Field label="引擎名称">
+          <input
+            value={draft.name}
+            placeholder="例如：介质生成引擎"
+            onChange={(event) => onChange({ name: event.target.value })}
+          />
+        </Field>
+        <Field label="所属阶段">
+          <select
+            value={draft.stage}
+            onChange={(event) => onChange({ stage: event.target.value as ProductionStage })}
+          >
+            {Object.entries(stageLabels).map(([key, label]) => (
+              <option key={key} value={key}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </Field>
+        <Field label="引擎类型">
+          <select
+            value={draft.kind}
+            onChange={(event) => onChange({ kind: event.target.value as EngineKind })}
+          >
+            {(Object.keys(KIND_TEXT) as EngineKind[]).map((key) => (
+              <option key={key} value={key}>
+                {KIND_TEXT[key]}
+              </option>
+            ))}
+          </select>
+        </Field>
+        <Field label="说明">
+          <input
+            value={draft.description}
+            placeholder="这个引擎负责什么"
+            onChange={(event) => onChange({ description: event.target.value })}
+          />
+        </Field>
+      </div>
+      <div className="field">
+        <span className="field-label">绑定技能（已选 {draft.skillIds.length} / 共 {skills.length}）</span>
+        <div className="engine-skill-picker">
+          {skills.map((skill) => {
+            const on = draft.skillIds.includes(skill.id);
+            return (
+              <button
+                key={skill.id}
+                type="button"
+                className={`engine-skill-chip ${on ? 'is-on' : ''}`}
+                onClick={() => toggleSkill(skill.id)}
+              >
+                {skill.name}
+                <em>{skill.id}</em>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      <div className="config-actions">
+        <button
+          className="button button-primary button-sm"
+          type="button"
+          disabled={busy}
+          onClick={onSave}
+        >
+          <Save size={14} />
+          {busy ? '保存中…' : '保存引擎'}
+        </button>
+        <button className="button button-ghost button-sm" type="button" onClick={onCancel}>
+          取消
+        </button>
+      </div>
     </div>
   );
 }

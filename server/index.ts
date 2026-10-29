@@ -496,6 +496,61 @@ api.post('/skills/:id/run', async (req, res) => {
   }
 });
 
+api.post('/engines', (req, res) => {
+  const body = req.body ?? {};
+  const name = String(body.name ?? '').trim();
+  if (!name) {
+    res.status(400).json({ message: '引擎需要名称。' });
+    return;
+  }
+  const timestamp = new Date().toISOString();
+  const engine: ProductionEngine = {
+    id: `engine-${Date.now().toString(36)}`,
+    name,
+    stage: (['analysis', 'script', 'mount', 'media', 'quality'] as const).includes(body.stage)
+      ? body.stage
+      : 'media',
+    kind: (['analysis', 'text', 'structure', 'media', 'quality'] as const).includes(body.kind)
+      ? body.kind
+      : 'media',
+    description: String(body.description ?? '').trim(),
+    skillIds: Array.isArray(body.skillIds) ? body.skillIds.map(String) : [],
+    config: body.config && typeof body.config === 'object' ? body.config : {},
+    enabled: body.enabled !== false,
+    isDefault: false,
+    builtIn: false,
+    runs: 0,
+    lastRun: '',
+    createdAt: timestamp,
+    updatedAt: timestamp
+  };
+  const db = mutateDb((store) => {
+    store.engines = [engine, ...store.engines];
+    pushActivity(store, {
+      kind: 'engine',
+      title: `新建介质引擎：${engine.name}`,
+      detail: `${STAGE_TEXT[engine.stage]} · ${engine.kind}`
+    });
+  });
+  res.json({ engines: db.engines });
+});
+
+api.delete('/engines/:id', (req, res) => {
+  const db = mutateDb((store) => {
+    const target = store.engines.find((item) => item.id === req.params.id);
+    if (!target) return;
+    store.engines = store.engines.filter((item) => item.id !== req.params.id);
+    if (target.isDefault && store.engines.length) {
+      const sameStage = store.engines.find((item) => item.stage === target.stage) ?? store.engines[0];
+      store.engines = store.engines.map((item) =>
+        item.id === sameStage.id ? { ...item, isDefault: true, enabled: true } : item
+      );
+    }
+    pushActivity(store, { kind: 'engine', title: `删除介质引擎：${target.name}`, detail: target.id });
+  });
+  res.json({ engines: db.engines });
+});
+
 api.get('/engines', (_req, res) => {
   res.json({ engines: readDb().engines, stageLabels: STAGE_TEXT });
 });
@@ -505,6 +560,14 @@ api.patch('/engines/:id', (req, res) => {
   const db = mutateDb((store) => {
     const target = store.engines.find((engine) => engine.id === req.params.id);
     if (!target) return;
+    if (typeof payload.name === 'string' && payload.name.trim()) target.name = payload.name.trim();
+    if ((['analysis', 'script', 'mount', 'media', 'quality'] as const).includes(payload.stage)) {
+      target.stage = payload.stage;
+    }
+    if ((['analysis', 'text', 'structure', 'media', 'quality'] as const).includes(payload.kind)) {
+      target.kind = payload.kind;
+    }
+    if (Array.isArray(payload.skillIds)) target.skillIds = payload.skillIds.map(String);
     if (typeof payload.enabled === 'boolean') target.enabled = payload.enabled;
     if (typeof payload.description === 'string') target.description = payload.description;
     if (payload.config && typeof payload.config === 'object') {
@@ -1270,7 +1333,7 @@ api.post('/lecture/blocks/:id', (req, res) => {
     pushActivity(store, {
       kind: 'project',
       title: `讲稿块已修改：${block.id}`,
-      detail: '标注需随讲稿重算，请在引擎台执行重算。'
+      detail: '标注需随讲稿重算，请在介质引擎执行重算。'
     });
   });
   res.json({ project: db.project, validation: validateProject(db.project) });

@@ -145,7 +145,7 @@ export function DashboardPage() {
                 ))}
               </div>
               <Link className="inline-link" to="/engines">
-                打开引擎台重新运行 <ArrowUpRight size={13} />
+              打开介质引擎重新运行 <ArrowUpRight size={13} />
               </Link>
             </Section>
 
